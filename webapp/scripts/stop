@@ -1,0 +1,10 @@
+#!/bin/bash
+
+PID_FILE=server.pid
+
+if [ -f $PID_FILE ];
+then
+	kill `cat $PID_FILE`
+else
+	echo "Unable to stop server, there is no $PID_FILE in the current directory."
+fi

@@ -1,0 +1,33 @@
+<script type="text/javascript">
+$(function() {	
+	stack.focus($("[emailAddress]"));
+	
+	$("[emailAddress], [password]").keypress(function(e) {
+		if(e.keyCode === 13)
+			signIn();
+	});
+	
+	$("[signInButton]").click(function() {
+		signIn();
+	});
+	
+	function signIn() {
+		stack.api({
+			url: "/api/accounts/sign-in",
+			method: "POST",
+			data: {
+				emailAddress: $("[emailAddress]").val(),
+				password: $("[password]").val(),
+				rememberMe: $("[rememberMe]").is(":checked")			
+			},
+			onSuccess: function(response) {
+				var destinationUrl = stack.getUrlParameter("destinationUrl");				
+				location.href = destinationUrl ? destinationUrl : response.destinationUrl;
+			},
+			onFailure: function(error) {
+				$("[errors]").text(error.description).show();
+			}		
+		});
+	};
+});
+</script>

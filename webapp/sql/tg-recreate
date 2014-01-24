@@ -1,0 +1,5 @@
+#!/bin/bash
+
+psql -h localhost -U tgriesser < initial/recreate.sql
+psql -h localhost -U rebar < initial/creates.sql
+psql -h localhost -U rebar < initial/inserts.sql

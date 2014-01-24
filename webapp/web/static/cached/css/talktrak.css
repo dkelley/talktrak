@@ -1,0 +1,114 @@
+/* Homepage */
+
+body {
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.centered {
+  /* text-align: center; */
+  margin:0px auto;
+}
+
+/* Custom container */
+.container-narrow {
+  margin: 0 auto;
+  max-width: 700px;
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+}
+.jumbotron h1 {
+  font-size: 72px;
+  line-height: 1;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 60px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+div.main-logo {
+  margin: 0 auto;
+  background-image: url(../img/logo.png);
+  height: 335px;
+  width: 250px;
+}
+
+div.login-buttons a.btn {
+  width: 200px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Main Pages */
+
+/* Edit Page */
+
+#mainEditor {
+  width: 95%;
+  height: 400px;
+}
+
+/* Base class */
+.trak-point {
+  position: relative;
+  margin: 15px 0;
+  padding: 19px 19px 14px;
+  *padding-top: 19px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+/* Echo out a label for the example */
+.trak-point span.trak-action {
+  display: block;
+  width: 40px;
+  height: 18px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  color: #9da0a4;
+}
+
+.trak-point span.trak-highlight {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+}
+
+.trak-point span.push {
+  background-color: #00FF00;
+}
+
+.trak-point span.pull {
+  background-color: #FF0000;
+}
+
+.trak-point span.trak-del {
+  	position: absolute;
+	bottom: -1px;
+	right: -1px;
+}
+
+.trak-point:hover {
+  cursor: pointer;
+}
+
+.point-upload-bar:hover {
+  cursor: pointer;
+}

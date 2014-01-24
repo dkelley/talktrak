@@ -1,0 +1,9 @@
+<h1>$status error</h1>
+
+#if($description)
+	<h2>#html($description)</h2>
+#end
+
+#if($stackTrace)
+<pre>$stackTrace</pre>
+#end

@@ -1,0 +1,33 @@
+<!--  load tracks and points -->
+
+
+<div id="appArea">
+
+	<div class="span8">
+		#if($action == "edit") 
+	  	<div id="js-trakTextView" class="hiddenForMobile">
+	  		<div id="trakEditor" class="well">
+				<h3 contenteditable="true" id="trakTitle">$trak.title</h3>
+  				<textarea id="mainEditor" class="textarea" placeholder="Enter text ...">$trak.description</textarea>
+				<div class="pull-left" style="margin-top: 8px;">					
+					<button class="btn btn-success" savetrak> Save </button>
+				</div>
+			</div>
+		</div>
+		#else
+		<div id="trakView" class="well">
+				<h3 id="trakTitle">$trak.title</h3>
+  				$trak.description  					
+		</div>		
+		#end
+	</div>
+	<div class="hiddenForFull">
+		mobile: show button to hide and show speech
+	</div>	
+	<div class="span4">
+	 	<div class="well">
+	  		<ul id="trakPoints">
+	  		</ul>	  
+	  	</div>
+	</div>
+</div>

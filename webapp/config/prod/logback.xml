@@ -1,0 +1,114 @@
+<configuration>
+    <!-- This is to make bridged java.util.logging calls performant -->
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+    	<resetJUL>true</resetJUL>
+  	</contextListener>
+        
+	<appender name="standard" class="ch.qos.logback.core.ConsoleAppender">	    
+	    <encoder>
+	        <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{0}:%line - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="noLineNumbers" class="ch.qos.logback.core.ConsoleAppender">	    
+	    <encoder>
+	        <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{0} - %msg%n</pattern>
+		</encoder>
+	</appender>	
+
+	<!-- ReBar -->
+	<logger name="com.rebar" level="DEBUG"/>
+	
+	<!-- Stack: Overall -->
+	<logger name="com.xmog.stack" level="DEBUG" additivity="false">
+		<appender-ref ref="standard" />
+	</logger>
+	
+	<!-- Stack: Server lifecycle -->
+	<logger name="com.xmog.stack.SERVER" level="DEBUG" additivity="false">
+		<appender-ref ref="noLineNumbers" />
+	</logger>
+	
+	<!-- Stack: Errors -->
+	<logger name="com.xmog.stack.ERROR_HANDLING" level="DEBUG" additivity="false">
+		<appender-ref ref="noLineNumbers" />
+	</logger>		
+	
+	<!-- Stack: Security (@Public URLs, @RoleRequired, API token auth, remember me, etc.) -->
+	<logger name="com.xmog.stack.AUTHENTICATION" level="DEBUG" additivity="false">
+		<appender-ref ref="noLineNumbers" />
+	</logger>	
+	<logger name="com.xmog.stack.AUTHORIZATION" level="DEBUG" additivity="false">
+		<appender-ref ref="noLineNumbers" />
+	</logger>	
+	
+	<!-- Stack: Requests -->
+	<logger name="com.xmog.stack.REQUEST" level="DEBUG" additivity="false">
+		<appender-ref ref="noLineNumbers" />
+	</logger>	
+	<logger name="com.xmog.stack.REQUEST_TIMING" level="DEBUG" additivity="false">
+		<appender-ref ref="noLineNumbers" />
+	</logger>
+	<logger name="com.xmog.stack.REQUEST_JSON_BODY" level="DEBUG" additivity="false">
+		<appender-ref ref="noLineNumbers" />
+	</logger>
+	<logger name="com.xmog.stack.CURRENT_CONTEXT" level="DEBUG" additivity="false">
+		<appender-ref ref="noLineNumbers" />
+	</logger>	
+	<logger name="com.xmog.stack.DEFAULT_SERVLET" level="DEBUG" additivity="false">
+		<appender-ref ref="noLineNumbers" />
+	</logger>		
+	
+	<!-- Stack: Response rendering -->
+	<logger name="com.xmog.stack.PAGE_RESPONSE" level="INFO" additivity="false">
+		<appender-ref ref="noLineNumbers" />
+	</logger>
+	<logger name="com.xmog.stack.JSON_RESPONSE" level="DEBUG" additivity="false">
+		<appender-ref ref="noLineNumbers" />
+	</logger>
+	
+	<!-- Stack: Database queries and transactions -->
+	<logger name="com.xmog.stack.SQL" level="DEBUG" additivity="false">
+		<appender-ref ref="noLineNumbers" />
+	</logger>
+	<logger name="com.xmog.stack.TRANSACTION" level="DEBUG" additivity="false">
+		<appender-ref ref="noLineNumbers" />
+	</logger>
+	
+	<!-- Stack: WebSockets -->
+	<logger name="com.xmog.stack.WEB_SOCKET_REQUEST" level="DEBUG" additivity="false">
+		<appender-ref ref="stack" />
+	</logger>	
+	<logger name="com.xmog.stack.WEB_SOCKET_LIFECYCLE" level="DEBUG" additivity="false">
+		<appender-ref ref="stack" />
+	</logger>	
+	
+	<!-- Stack: Messaging (email etc.) -->
+	<logger name="com.xmog.stack.EMAIL" level="DEBUG" additivity="false">
+		<appender-ref ref="noLineNumbers" />
+	</logger>		
+	
+	<logger name="com.xmog.stack.SMS" level="DEBUG" additivity="false">
+		<appender-ref ref="noLineNumbers" />
+	</logger>		
+	
+	<!-- Stack: Native process execution -->
+	<logger name="com.xmog.stack.PROCESS" level="INFO" additivity="false">
+		<appender-ref ref="noLineNumbers" />
+	</logger>	
+	
+	<!-- 3rd party -->	
+	<logger name="org.eclipse" level="WARN"/>
+	<logger name="com.google" level="INFO"/>
+	<logger name="com.sun" level="WARN"/>
+	<logger name="sun" level="WARN"/>
+	<logger name="javax.xml" level="WARN"/>
+	<logger name="org.apache" level="INFO"/>	
+	<logger name="org.apache.velocity" level="OFF"/>	 
+	<logger name="org.jvnet.mimepull" level="INFO"/>
+	<logger name="org.reflections" level="ERROR"/>	
+
+	<root level="DEBUG">          
+		<appender-ref ref="standard" />
+	</root>  
+</configuration>

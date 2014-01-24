@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @author Dan Kelley -->
+<project name="ReBar" default="dist">
+
+	<!-- Directories -->
+	<property name="librariesDir" value="libraries" />
+	<property name="sourceDir" value="source/app" />
+	<property name="webDir" value="web" />	
+	<property name="buildDir" value=".build/ant" />
+	<property name="buildClassesDir" value="${buildDir}/classes" />
+	<property name="buildWebDir" value="${buildDir}/web" />			
+	<property name="scriptsDir" value="scripts" />
+
+	<!-- Java switches -->
+	<property name="javaVersion" value="1.6" />
+	<property name="javaDebug" value="true" />
+	<property name="javaDebugLevel" value="lines,vars,source" />
+
+	<!-- Classpaths -->
+	<path id="compilationClasspath">
+		<fileset dir="${librariesDir}">
+			<include name="**/*.jar" />
+		</fileset>		
+	</path>
+	
+	<path id="runClasspath">
+		<pathelement location="${buildClassesDir}"/>
+		<pathelement location="${sourceDir}"/>			
+		<fileset dir="${librariesDir}">
+			<include name="**/*.jar" />
+		</fileset>		
+	</path>	
+
+	<!-- Targets -->
+	<target name="compile" description="Compiles application code">
+		<mkdir dir="${buildClassesDir}"/>
+  				
+		<echo message="Compiling app..." />
+		
+		<javac srcdir="${sourceDir}" destdir="${buildClassesDir}" source="${javaVersion}" target="${javaVersion}"
+			debug="${javaDebug}" debuglevel="${javaDebugLevel}" includeantruntime="false">
+			<classpath refid="compilationClasspath"/>			
+		</javac>
+		
+		<!-- Also include all non-Java files in the source directory -->
+		<copy todir="${buildClassesDir}">
+    		<fileset dir="${sourceDir}" excludes="**/*.java"/>
+  		</copy>			
+	</target>
+	
+	<target name="run" depends="clean, compile" description="Runs the webapp.">
+	    <echo message="Running the app in dev mode..." />
+		<java classname="com.rebar.web.server.ServerLauncher" fork="yes">
+    		<jvmarg value="-Denv=dev"/>
+    		<jvmarg value="-Duser.timezone=UTC"/>    		
+    		<classpath refid="runClasspath" />		 		
+  		</java>	    
+	</target>
+	
+	<target name="dist" depends="clean, compile" description="Creates a zip file that's ready to deploy.">
+		<echo message="Creating distributable zip..." />
+		
+		<taskdef name="process-cached-files" classname="com.xmog.stack.ant.ProcessCachedFilesTask">				
+			<classpath refid="runClasspath" />						
+		</taskdef>		
+		<process-cached-files webdir="${webDir}" weboutputdir="${buildWebDir}" manifestoutputdir="${buildClassesDir}" compress="true" debug="true"/>		
+		
+		<zip destfile="ReBar.zip">
+		    <zipfileset dir="config" prefix="ReBar/config"/>
+		    <zipfileset dir="${buildWebDir}" prefix="ReBar/web"/>
+		    <zipfileset dir="${librariesDir}" prefix="ReBar/libraries"/> 
+			<zipfileset dir="${buildDir}/classes" prefix="ReBar/classes"/>
+			<zipfileset dir="${scriptsDir}" filemode="755" prefix="ReBar"/>						 					      
+		</zip>
+	</target>
+
+	<target name="clean" description="Gets rid of build artifacts">
+		<echo message="Cleaning build artifacts..." />
+		<delete dir="${buildDir}" includeEmptyDirs="true" />		
+	</target>	
+</project>

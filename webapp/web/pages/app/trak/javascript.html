@@ -1,0 +1,75 @@
+<script type="text/javascript" src="#cached('/static/cached/js/bootstrap-wysihtml5/lib/js/wysihtml5-0.3.0.js')"></script>
+<script type="text/javascript" src="#cached('/static/cached/js/bootstrap-wysihtml5/dist/bootstrap-wysihtml5-0.0.2.js')"></script>
+<script type="text/javascript" src="#cached('/static/cached/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js')"></script>
+<script type="text/javascript">
+
+var currentTrakId = #if($trak.trakId) $trak.trakId #else null #end;
+var currentUserId = $currentContext.getSignedInAccountId();
+var trakAction = "$action";
+
+</script>
+
+<script type="text/javascript" src="#cached('/static/cached/js/trak_point.js')"></script>
+
+<script type="text/javascript">
+$(function() {	
+	$('#mainEditor').wysihtml5({
+			"image": false
+	});
+/* 	$('#mainEditor').mousedown(function() {
+	});	 */
+
+	/*
+	## FIX TO ADD NOTE 
+	
+	  events:
+    'click ' : 'addNewPoint'
+  addNewPoint: (e) ->
+
+    */
+	
+    $("div.js-addPoint").live("click", function(){ 
+        //e.preventDefault()
+        new EditPointView({model: new TrakPointModel, collection: points}).modal();
+    });   
+    
+	if (trakAction != 'present'){
+	 	$( "#trakPoints" ).sortable({
+		    update: function(event, ui) {
+		        orderedPointIds = $('.ui-sortable').sortable("toArray");
+		        stack.api({
+					url: "/api/trak/$trak.trakId/sortpoints",
+					method: "PUT",
+					data: {
+			            points: orderedPointIds,
+					},
+					onSuccess: function(response) {					
+						// do nothing
+					},
+					onFailure: function(error) {
+						$("[errors]").text(error.description).show();
+					}		
+				});
+		    }
+		});
+	}
+ 	$('button[savetrak]').bind('click', function() {
+ 		stack.api({
+			url: "/api/trak/$trak.trakId",
+			method: "PUT",
+			data: {
+				description: $('.textarea').val(),
+ 				title: $('#trakTitle').text()
+			},
+			onSuccess: function(response) {					
+				// do nothing
+			},
+			onFailure: function(error) {
+				$("[errors]").text(error.description).show();
+			}		
+		});
+	});
+
+
+});
+</script>

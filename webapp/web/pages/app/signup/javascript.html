@@ -1,0 +1,31 @@
+<script type="text/javascript">
+$(function() {	
+	stack.focus($("[emailAddress]"));
+	
+	$("[emailAddress], [password]").keypress(function(e) {
+		if(e.keyCode === 13)
+			signIn();
+	});
+	
+	$("[signUpButton]").click(function() {
+		signUp();
+	});
+	
+	function signUp() {
+		stack.api({
+			url: "/api/accounts/sign-up",
+			method: "POST",
+			data: {
+				emailAddress: $("[emailAddress]").val(),
+				password: $("[password]").val()			
+			},
+			onSuccess: function(response) {
+				location.href = "/";
+			},
+			onFailure: function(error) {
+				$("[errors]").text(error.description).show();
+			}		
+		});
+	};
+});
+</script>

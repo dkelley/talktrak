@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Launch like this: ./start dev|qa|prod
+
+ENVIRONMENT=$1
+LOG_FILE=app.log
+
+die () {
+	echo "Usage: $0 dev|qa|prod"
+	exit 1
+}
+
+[ "$#" -eq 1 ] || die
+
+if [ $ENVIRONMENT != "dev" -a $ENVIRONMENT != "qa" -a $ENVIRONMENT != "prod" ]
+then
+	die
+fi
+
+echo "Launching server, output will be written to $LOG_FILE..."
+
+nohup java -Denv=$ENVIRONMENT -Duser.timezone=UTC -Xms256m -Xmx512m -classpath classes:.build/ant/classes:libraries/* com.rebar.web.server.ServerLauncher > $LOG_FILE 2>&1&

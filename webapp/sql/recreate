@@ -1,0 +1,5 @@
+#!/bin/bash
+
+psql -U postgres < initial/recreate.sql
+psql -U rebar < initial/creates.sql
+psql -U rebar < initial/inserts.sql

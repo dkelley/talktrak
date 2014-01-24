@@ -1,0 +1,69 @@
+<!--  load tracks and points -->
+
+<div id="appArea"><div class="span12"><table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Trak Title</th>
+      <th>Creator</th>
+      <th>Role</th>
+      <th>Last Updated</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+	#foreach($trak in $traks)
+		 <tr data-trakid="$trak.trakId">
+			  <td>$trak.title</td>
+			  <td>$trak.username</td>
+			  <td>$trak.role</td>
+			  <td>$trak.updatedDate</td>
+			  <td>
+			  	#if ($trak.inUse){
+			  	<span class="label label-important">In Use</span>
+			  	#end
+			  	&nbsp;
+			  	<div class="btn-toolbar">
+					<div class="btn-group">
+					  #if ($trak.roleId == $ROLE_OWNER)
+					  <button present class="btn">Present</button>
+					  <button collaborate class="btn">Collaborate <span class="badge #if ($trak.collaboratorCnt > 0) "badge-important" #end">$trak.collaboratorCnt</span></button>
+					  <button edit class="btn">Edit</button>
+					  #elseif ($trak.roleId == $ROLE_EDITOR)
+					  <button present class="btn">Present</button>
+					  <button collaborate class="btn">Collaborate <span class="badge #if ($trak.collaboratorCnt > 0) "badge-important" #end">$trak.collaboratorCnt</span></button>					  
+					  <button edit class="btn" disabled>Edit</button>
+					  #elseif ($trak.roleId == $ROLE_ASSISTANT)
+					  <button present class="btn">Present</button>
+					  <button collaborate class="btn">Collaborate <span class="badge #if ($trak.collaboratorCnt > 0) "badge-important" #end">$trak.collaboratorCnt</span></button>					  
+					  <button edit class="btn" disabled>Edit</button>
+					  #end
+					</div>
+					<div class="btn-group">
+						<button class="btn" data-trakid="$trak.trakId" delete><i class="icon-trash"></i>&nbsp;Delete</button>
+					</div>
+				</div>
+			  </td>
+		</tr>
+	#end
+  </tbody>
+</table>
+
+<hr>
+
+
+<div class="centered">
+  <a href="/home/trak" class="btn btn-large btn-success">Add new Presentation</a>
+</div>
+</div>
+
+<div class="span12 footer" style="display:none">
+
+  <hr>
+
+  <div class="footer">
+    <p>&copy; TalkTrak 2013</p>
+  </div>
+
+</div>
+
+</div>

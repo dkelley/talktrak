@@ -1,0 +1,7 @@
+To start the server:
+
+./start dev|qa|prod
+
+To stop the server:
+
+./stop

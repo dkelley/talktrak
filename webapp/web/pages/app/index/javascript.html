@@ -1,0 +1,41 @@
+<script type="text/javascript">
+
+var eventObj;
+
+$(function() {	
+	
+	$('button[delete]').bind('click', function(e) {
+		e.stopPropagation();
+		if (confirm('Are you sure you would like to delete this trak')){
+			stack.api({
+				url: "/api/trak/" + $(this).attr("data-trakId"),
+				method: "DELETE",
+				onSuccess: function(response) {					
+					location.href = location.href;
+				},
+				onFailure: function(error) {
+					$("[errors]").text(error.description).show();
+				}		
+			});
+		}
+	});
+ 	
+ 	$('button[present]').bind('click', function(e) {
+ 		//console.log($(this).parents('tr'));
+ 		var trackId = $(this).parents('tr').attr("data-trakId");
+		location.href = "/home/trak/" + trackId + "/present";
+	});
+ 	
+ 	$('button[collaborate]').bind('click', function(e) {
+ 		//console.log($(this).parents('tr'));
+ 		var trackId = $(this).parents('tr').attr("data-trakId");
+		location.href = "/home/trak/" + trackId + "/collaborate";
+	});
+ 	
+ 	$('button[edit]').bind('click', function(e) {
+ 		//console.log($(this).parents('tr'));
+ 		var trackId = $(this).parents('tr').attr("data-trakId");
+		location.href = "/home/trak/" + trackId + "/edit";
+	});
+});
+</script>

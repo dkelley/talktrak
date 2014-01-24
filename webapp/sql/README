@@ -1,0 +1,3 @@
+To rebuild the DB from scratch, run ./recreate.
+
+See the contents of the "initial" folder to see what scripts get run.

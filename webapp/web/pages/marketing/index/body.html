@@ -1,0 +1,402 @@
+	<!-- Start Wrapper -->
+	<div id="page_wrapper">
+		
+	<!-- Start Header -->
+	<header>
+		<div class="container">
+			<!-- Start Social Icons -->
+			<aside>
+				<ul class="social">
+					<li class="facebook"><a href="http://facebook.com/talktrak">Facebook</a></li>
+					<li class="twitter"><a href="http://twitter.com/#talktrak">Twitter</a></li>
+					<li class="email"><a href="" title="info@talktrak.com">Email</a></li>
+					<!-- More Social Icons:
+					<li class="rss"><a href="" title="App Updates">RSS</a></li>
+					<li class="dribbble"><a href="">Dribbble</a></li>
+					<li class="google"><a href="">Google</a></li>
+					<li class="flickr"><a href="">Flickr</a></li>
+					-->
+				</ul>
+			</aside>
+			<!-- End Social Icons -->
+			
+			<!-- Start Navigation -->
+			<nav>
+				<ul>
+					<li style="display: none"><a href="#home">How it works</a></li>
+					<li><a href="#howitworks">How it works</a></li>
+					<li><a href="#faq">FAQ</a></li>
+					<li><a href="#about">About Us</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+				<span class="arrow"></span>
+			</nav>
+			<!-- End Navigation -->
+		</div>
+	</header>
+	<!-- End Header -->
+	
+	<section class="container">
+		
+		<!-- Start App Info -->
+		<div id="app_info">
+			<!-- Start Logo -->
+			<a href="#home" class="logo" style="margin:0px auto; width: 173px">
+				<img src="/static/cached/img/BlueLogo.png" alt="TalkTrak" />
+			</a>
+			<!-- End Logo -->
+			<span class="tagline">An app for interactive public speaking.</span>
+			
+			<div class="buttons">
+				<a href="#" class="large_button" id="apple">
+					<span class="icon"></span>
+					<em>Download now for</em> iPhone
+				</a>
+				#if ($currentContext.isSignedIn())
+				<a href="javascript://" class="large_button" id="signout" signOutLink>
+					Sign-out
+				</a>				
+				#else
+				<a href="/home" class="large_button" id="signup">
+					<i class="icon-book"></i>				
+					<em>Login or</em> Sign-up
+				</a>
+				#end
+			</div>
+			<!-- Alignments options: right_align, left_align, centered -->
+			<!-- 
+			<div class="price centered"> 
+				<p>Just $2.99 for a limited time!</p>
+			</div>
+			 -->
+		</div>
+		<!-- End App Info -->		
+		
+		<!-- Start Pages -->
+		<div id="pages">
+			<div class="top_shadow"></div>
+			
+			<!-- Start Home -->
+			<div id="home" class="page">
+				
+				<div id="sliderHome">
+
+					<div class="slide" data-effect-out="slide">
+						<div class="background ipad-black-horizontal">
+							<img src="/static/cached/img/mockup1.png" alt="" />
+						</div>						
+					</div>
+				</div>				
+	
+			</div>
+			<!-- End Home -->			
+			
+			<!-- Start How It Works -->
+			<div id="howitworks" class="page">
+				
+				<div id="slider">
+
+					<div class="slide" data-effect-out="slide">
+						<div class="background ipad-black-horizontal">
+							<img src="/static/cached/img/mockup1.png" alt="" />
+						</div>						
+					</div>
+					
+					<div class="slide" data-effect-in="slide">
+						
+						<div class="background iphone-white">
+							<img src="/static/cached/img/slider/iphone-back.jpg" alt="" />
+						</div>
+						
+						<div class="foreground iphone-white">
+							<img src="/static/cached/img/slider/iphone-back.jpg" alt="" />
+						</div>
+						
+					</div>
+				
+					<div class="slide">
+						
+						<div class="background blackberry">
+							<img src="/static/cached/img/slider/blackberry-back.jpg" alt="" />
+						</div>
+						
+						<div class="foreground blackberry">
+							<img src="/static/cached/img/slider/blackberry-front.jpg" alt="" />
+						</div>
+						
+					</div>
+					
+					<div class="slide">
+						
+						<div class="background android">
+							<img src="/static/cached/img/slider/android-back.jpg" alt="" />
+						</div>
+						
+						<div class="foreground android">
+							<img src="/static/cached/img/slider/android-back.jpg" alt="" />
+						</div>
+						
+					</div>
+
+					<div class="slide">
+						
+						<div class="background ipad-white">
+							<img src="/static/cached/img/slider/ipad.jpg" alt="" />
+						</div>
+												
+					</div>
+					
+				</div>
+			
+			</div>
+			<!-- End How It Works -->
+			
+			<!--  Start FAQ -->
+			<div id="faq" class="page">
+				
+				<h1>FAQ</h1>
+				
+				<div class="about_us content_box">
+					<div class="">
+<p>
+<b>What is TalkTrak and why should I use it?</b><br/>
+You don't always have the luxury of speaking to a passive listener.  You may face questions that demand immediate and competent responses.  TalkTrak gives you the tools to be ready.
+</p>
+
+<p>
+<b>Alongside your scripted notes, you can view:</b><br/>
+<ul>
+<li><i class="icon-search"></i>Prepared notes and documents for responding to questions you expect, and</li>
+<li><i class="icon-search"></i>Helpful hints and documents from your collaborators for responding to the unexpected.</li>
+</ul>
+</p>
+<p>
+Who is this for?
+Anyone who speaks to other people and wants to communicate clearly:
+- Public speakers
+- Lawyers
+- Sales representatives
+- Teachers
+- Students
+- The rest of the human race
+</p>
+
+<p>
+<b>Is it hard to use?</b><br/>
+We don't think so--check out the "How it Works" tab above.  There's three basic steps to setting up a TalkTrak. 
+<ul>
+<li>First, simply copy and paste your speaking notes into the app.</li>
+<li>Second, prep for questions from your audience by leaving notes-to-self with whatever you need to respond.</li>
+<li>Third, invite your friends and colleagues to your presentation, and they can give you real-time hints and feedback such as "talk slower," or "don't forget to quote ___."</li>
+</p>
+
+<p>
+<b>Do I need a special device to use it?</b><br/>
+[Right now you can use Tt on any web enabled computer or laptop. Additionally,] you can use it on your iPhone or iPad.
+</p>
+
+<p>
+<b>How much will this cost me?</b><br/>
+Tbd
+</p>
+
+<p>
+<b>What if I have an idea to make the app better?</b><br/>
+Email: <a mailto:"ideas@talktrak.com">ideas@talktrak.com</a>
+</p>
+
+<p>
+<b>What happens to my presentation notes after I am done speaking?</b><br/>
+Don't worry, they're saved in the cloud!
+</p>
+
+<p>
+<b>How did you guys come up with the idea for TalkTrak?</b><br/>
+We got tired of fumbling around when we were speaking in front of crowds so we figured merging the coolness of an iPad with a sweet way to prepare for a speaking engagement would be the perfect way to solve this issue.
+</p>
+
+<p>
+<b>Which historical figures should have used talk trak?</b><br/>
+Rick Perry
+</p>
+
+<p>
+<b>What is the awesome-ist use case for talk trak?</b><br/>
+A 13 year old boy asking a girl out do the first time! Here is a link to the talktrak
+</p>
+
+<p>
+<b>What do I do if I want to use TalkTrak but collaboration is not allowed (e.g., presenting in class for a grade)? </b><br/>
+- Simple, don't invite any collaborators.
+</p>
+
+<p>
+<b>What happens if I don't have internet access?</b><br/>
+- [You're screwed for collaboration, but otherwise it should work.]
+</p>
+
+					</div>
+				</div>
+			</div>
+			
+			
+			<!--  End FAQ -->
+			
+			<!-- Start About -->
+			<div id="about" class="page">
+				
+				<h1>About</h1>
+				
+				<div class="about_us content_box">
+					<div class="one_half">
+						<h2>About Us</h2>
+						<p>You don't always have the luxury of speaking to a passive listener.  Questions and issues come up and demand responses.  TalkTrak gives you the tools to be ready.</p>
+						<br/>
+						<p>Alongside your scripted notes, you can respond</p> 
+						<br/>
+						<p>For questions you expect: leave notes to yourself or supporting documents with the information you need to respond persuasively.</p>
+						<br/>
+						<p>For questions you don't expect: invite collaborators who can send you hints and documents in real time.</p>
+					</div>
+
+					<div class="one_half column_last">
+						<img src="/static/cached/img/speaker.jpg" alt="" height="300" width="214" />
+					</div>
+				</div>
+				
+				<div class="team_members">
+					<div class="person one_half">
+						<img src="/static/cached/img/jacob_dreyfuss.jpg" alt="" height="90" width="90"/>
+						<h3>Jacob Dreyfuss</h3>
+						<span>Founder</span>
+						<ul class="social">
+							<li class="facebook"><a href="http://www.facebook.com/jacob.dreyfuss">Facebook</a></li>
+							<li class="twitter"><a href="http://twitter.com/">Twitter</a></li>
+							<li class="linkedin"><a href="https://www.linkedin.com/in/jacobdreyfuss10001">LinkedIn</a></li>							
+						</ul>
+					</div>
+					<div class="person one_half column_last">
+						<img src="/static/cached/img/racerX.png" alt="" />
+						<h3>Racer X</h3>
+						<span>Founder</span>
+						<ul class="social">
+							<li class="facebook"><a href="http://www.facebook.com/">Facebook</a></li>
+							<li class="twitter"><a href="http://twitter.com/">Twitter</a></li>
+							<li class="linkedin"><a href="https://www.linkedin.com/">LinkedIn</a></li>							
+						</ul>					
+					
+					
+					</div>
+					<div class="person one_half">
+						<img src="/static/cached/img/dan_kelley.jpg" alt="" height="90" width="90"/>
+						<h3>Dan Kelley</h3>
+						<span>Deverloper</span>
+						<a href="http://xmog.com">Xmog.com</a>
+						<ul class="social">
+							<li class="facebook"><a href="http://www.facebook.com/dkelley17">Facebook</a></li>
+							<li class="twitter"><a href="http://twitter.com/dkelley17">Twitter</a></li>
+							<li class="linkedin"><a href="https://www.linkedin.com/in/dkelley17">LinkedIn</a></li>							
+						</ul>
+					</div>
+					<!-- 
+					<div class="person one_half column_last">
+						<img src="/static/cached/img/joe_fritz.jpg" alt="" height="90" width="90"/>
+						<h3>Joe Fritz</h3>
+						<span>UI/UX Expert</span>
+						<a href="#">http://website.com</a>
+						<ul class="social">
+							<li class="facebook"><a href="http://www.facebook.com/joefritzzz">Facebook</a></li>
+							<li class="twitter"><a href="http://twitter.com/joefritz">Twitter</a></li>
+							<li class="dribbble"><a href="">Dribbble</a></li>					
+						</ul>
+					</div>
+					 -->
+					<!-- 	
+					<div class="person one_half column_last">
+						<img src="/static/cached/img/about-team_4.png" alt="" />
+						<h3>Mary Smith</h3>
+						<span>Support</span>
+						<a href="#">http://website.com</a>
+						<ul class="social">
+							<li class="facebook"><a href="">Facebook</a></li>
+							<li class="twitter"><a href="">Twitter</a></li>
+							<li class="dribbble"><a href="">Dribbble</a></li>							
+						</ul>
+ 		
+					</div>
+-->					
+				</div>
+				
+			</div>
+			<!-- End Team -->			
+			
+			<!-- Start Start Contact -->
+			<div id="contact" class="page">
+				
+				<h1>Contact</h1>
+				
+				<p>For general questions, bug reports or press inquires please fill out the form below.</p>
+				
+				<div id="contact_form">
+					
+					<div class="validation">
+						<p>Oops! Please correct the highlighted fields...</p>
+					</div>
+
+					<div class="success">
+						<p>Thanks! I'll get back to you shortly.</p>
+					</div>
+				
+					<form action="javascript:;" method="post">
+						<div class="row">
+							<p class="left">
+								<label for="name">Name*</label>
+								<input type="text" name="name" id="name" value="" />
+							</p>
+							<p class="right">
+								<label for="email">Email*</label>
+								<input type="text" name="email" id="email" value="" />
+							</p>
+						</div>
+					
+						<div class="row">
+							<!-- 
+							<p class="left">
+								<label for="website">Website</label>
+								<input type="text" name="website" id="website" value="" />
+							</p>
+							 -->
+							<p>
+								<label for="subject">Subject</label>
+								<input type="text" name="subject" id="subject" value="" />
+							</p>
+						</div>
+					
+						<p>
+							<label for="message" class="textarea">Message</label>
+							<textarea class="text" name="message" id="message"></textarea>
+						</p>
+					
+						<input type="submit" class="button white" value="Send &#x2192;" />
+					</form>
+				
+				</div>
+				
+			</div>
+			<!-- End Start Contact -->
+	
+			<div class="bottom_shadow"></div>
+		</div>
+		<!-- End Pages -->
+		
+		<div class="clear"></div>
+	</section>
+	
+	<!-- Start Footer -->
+	<footer class="container">
+		<p>TalkTrak &copy; 2012. All Rights Reserved.</p>
+	</footer>
+	<!-- End Footer -->
+	
+	</div>
+	<!-- End Wrapper -->
