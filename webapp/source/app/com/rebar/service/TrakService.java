@@ -4,6 +4,8 @@
 package com.rebar.service;
 import static java.lang.String.format;
 
+import static java.util.UUID.randomUUID;
+
 import java.util.Date;
 import java.util.List;
 
@@ -60,6 +62,10 @@ public class TrakService {
   public TrakDetail findTrakDetailById(Long trakId, Long accountId) {
     return database.queryForObject("select * from trak_detail where trak_id = ? and account_id = ?", TrakDetail.class, trakId, accountId);
   }    
+
+  public TrakDetail findTrakDetailByUrl(String trakUrl) {
+    return database.queryForObject("select * from trak_detail where trak_url = ?", TrakDetail.class, trakUrl);
+  }   
   
   public void updateTrak(Trak trak) {
     database.executeUpdate("update trak set description = ?,title=? where trak_id = ?", trak.getDescription(), trak.getTitle(), trak.getTrakId());
@@ -77,6 +83,12 @@ public class TrakService {
       Long.class, point.getTrakId(), point.getTitle(), point.getDescription(), accountId, new Date(), new Date());
   }  
   
+  public Long saveAnonymousPoint(Point point) {
+	    logger.debug(format("saving points for trak %d", point.getTrakId()));
+	    return database.executeInsert("Insert into point(point_id, trak_id, title, sort_order, description, created_by, created_date, updated_date) VALUES (nextval('point_seq'), ?, ?,1, ?, ?, ?,?) RETURNING point_id", 
+	      Long.class, point.getTrakId(), point.getTitle(), point.getDescription(), 0, new Date(), new Date());
+	  }  
+  
   public void setPointOrder(Long pointId, int sortOrder, Long accountId) {
 	  logger.debug(format("updating point order"));
 	    database.executeUpdate("update point set sort_order = ? from account_role_trak art where point.point_id = ? and art.account_id = ?",
@@ -87,8 +99,8 @@ public class TrakService {
 	    logger.debug(format("saving trak %s", trak.getDescription()));
 	    return database
 	      .executeInsert(
-	        "INSERT INTO trak(trak_id, title, description, created_date, updated_date) VALUES (nextval('trak_seq'), ?, ?, ?, ?) RETURNING trak_id",
-	        Long.class, trak.getTitle(), trak.getDescription(), new Date(), new Date());    
+	        "INSERT INTO trak(trak_id, title, description, trak_url, created_date, updated_date) VALUES (nextval('trak_seq'), ?, ?, ?, ?, ?) RETURNING trak_id",
+	        Long.class, trak.getTitle(), trak.getDescription(), randomUUID(), new Date(), new Date());    
 	  }    
   
   public void saveTrakRoleForAccount(Long trakId, Long accountId, Long roleId) {

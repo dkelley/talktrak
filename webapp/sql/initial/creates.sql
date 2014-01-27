@@ -39,6 +39,7 @@ CREATE TABLE trak (
 	    trak_id BIGINT NOT NULL,	
 	    title CHARACTER VARYING(100),
 	    description TEXT,
+	    trak_url CHARACTER VARYING(100),
 		active BOOLEAN NOT NULL DEFAULT TRUE,  
 		inUse BOOLEAN NOT NULL DEFAULT FALSE,
 		isSpeechVisible BOOLEAN NOT NULL DEFAULT TRUE,
@@ -121,7 +122,7 @@ where active = true
 group by p.point_id, hp.read_flag order by point_id;
 
 CREATE VIEW trak_detail as
-select t.trak_id, t.title, t.description, t.created_date, t.updated_date, art.role_id, a.email, r.description as role, a.username, art.account_id, 
+select t.trak_id, t.title, t.trak_url, t.description, t.created_date, t.updated_date, art.role_id, a.email, r.description as role, a.username, art.account_id, 
 	(select count(account_id) from account_role_trak art1 where art1.trak_id = t.trak_id and art1.account_id != art.account_id ) as collaborator_cnt 
 from trak t, account_role_trak art, account a, role r 
 where t.active = true and t.trak_id = art.trak_id and art.account_id = a.account_id and art.role_id = r.role_id;

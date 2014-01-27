@@ -5,6 +5,7 @@ import org.apache.commons.lang.StringUtils;
 public class Trak extends BaseModel{
     private Long trakId;
     private String title;  
+    private String trakUrl;  
     private String description;
     private boolean active;
     private boolean inUse;
@@ -58,5 +59,11 @@ public class Trak extends BaseModel{
     public void setInUse(boolean inUse) {
       this.inUse = inUse;
     }
+	public String getTrakUrl() {
+		return trakUrl;
+	}
+	public void setTrakUrl(String trakUrl) {
+		this.trakUrl = trakUrl;
+	}
  
   }

@@ -1,0 +1,22 @@
+<script type="text/javascript">
+$(function() {	
+
+	$('button[savenote]').bind('click', function() {
+ 		stack.api({
+			url: "/api/trak/$trak.trakId",
+			method: "PUT",
+			data: {
+				description: $('.textarea').val(),
+ 				title: $('#trakTitle').text()
+			},
+			onSuccess: function(response) {					
+				// do nothing
+			},
+			onFailure: function(error) {
+				$("[errors]").text(error.description).show();
+			}		
+		});
+	});
+
+});
+</script>

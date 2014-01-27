@@ -1,8 +1,7 @@
 package com.rebar.web.controller.api;
 
-import com.xmog.stack.exception.ValidationException;
-
 import static com.xmog.stack.web.ContentTypes.CONTENT_TYPE_JSON;
+import static org.slf4j.LoggerFactory.getLogger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,11 +14,17 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import org.slf4j.Logger;
+
+import com.google.common.eventbus.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.rebar.event.PointPassedEvent;
 import com.rebar.model.Point;
 import com.rebar.service.TrakService;
 import com.rebar.web.context.CurrentContext;
+import com.xmog.stack.exception.ValidationException;
+import com.xmog.stack.web.annotation.Public;
 
 /**
  * @author Dan Kelley
@@ -35,6 +40,11 @@ public class PointsApiController {
   @Inject
   private TrakService trakService;
 
+  @Inject
+  private EventBus eventBus;
+
+  private static final Logger logger = getLogger(PointsApiController.class);   
+  
   @GET
   @Path("/{id}")
   public Point getPoint(@PathParam("id") final Long id) {
@@ -63,6 +73,21 @@ public class PointsApiController {
       }
     };
   }
+  
+  @POST
+  @Public
+  @Consumes(CONTENT_TYPE_JSON)
+  @Path("/createandpass")
+  public Map<String, Object> createPointAndPass(Point command) {    
+    Long pointId = trakService.saveAnonymousPoint(command);
+    eventBus.post(new PointPassedEvent(pointId));
+    logger.debug("saved point and updated bus");
+    return new HashMap<String, Object>() {
+      {
+        put("success", "true");
+      }
+    };
+  }  
   
   @POST
   @Path("/{id}/processed")

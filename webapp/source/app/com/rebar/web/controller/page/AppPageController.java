@@ -116,6 +116,18 @@ public class AppPageController {
     });
   }
   
+  @GET
+  @Public
+  @Path("/{trakUrl}")
+  public Page loadTrakForCollab(@PathParam("trakUrl") String trakUrl) {
+    final TrakDetail trak = trakService.findTrakDetailByUrl(trakUrl);
+    return appPage("collab", new HashMap<String, Object>() {
+      {
+        put("trak", trak);
+        put("appName", "ReBar");
+      }
+    });
+  }
 
   protected Page appPage(final String name, Map<String, Object> model) {
     return new Page("templates/app.html", new HashMap<String, Object>(model) {
