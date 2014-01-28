@@ -15,7 +15,7 @@ import com.xmog.stack.util.Encryptor;
 /**
  * @author Dan Kelley
  */
-public class AccountService implements StackAccountService<Account> {  
+public class AccountService implements StackAccountService<Account, Long, Long> {  
   private Database database;
   private Encryptor encryptor;
 

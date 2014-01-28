@@ -12,7 +12,7 @@ import com.xmog.stack.web.context.StackAccount;
 /**
  * @author Dan Kelley
  */
-public class Account implements StackAccount {
+public class Account  implements StackAccount<Long> {
   private Long accountId;
   private String email;
   private String apiToken;

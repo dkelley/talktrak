@@ -9,6 +9,29 @@ stack.characterEncoding = "UTF-8";
  */
 stack.apiCallsInProgress = {};
 
+stack.displayErrors = function(error) {
+	  var errors = [];
+
+	  if (error.fieldErrors)
+	    $.each(error.fieldErrors, function(i, fieldError) {
+	      errors.push(fieldError.error);
+	    });
+
+	  if (error.globalErrors)
+	    $.each(error.globalErrors, function(i, globalError) {
+	      errors.push(globalError);
+	    });
+
+	  if (errors.length === 0)
+	    errors.push(error.description);
+
+	  $("#alertify-logs").empty();
+	  alertify.set({ delay: 10000 });
+	  $.each(errors, function(i, error) {
+	    alertify.error(error, "", 0);
+	  });
+	};
+
 stack.api = function(params) {
     if (!params)
         throw "You must supply parameters.";

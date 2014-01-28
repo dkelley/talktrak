@@ -39,7 +39,7 @@ public class PointUpdateWebSocket extends StackWebSocket {
     super();
     eventBus.register(this);
     this.eventBus = eventBus;
-    logger.debug(format("Register DeviceLocationWebSocket with %s", eventBus));
+    logger.debug(format("Register PointUpdateWebSocket with %s", eventBus));
   }
   
   @Override

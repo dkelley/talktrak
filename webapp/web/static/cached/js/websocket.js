@@ -302,25 +302,25 @@ $(function() {
     waitingWebSocket.onopen = function(open) {
       console.log("WebSocket opened.", open);
 
-//      var command = {
-//        ownerApiToken : ownerApiToken,
-//        gameId : gameId
-//      }
-//
-//      waitingWebSocket.send(stack.toJson(command));
+      var command = {
+        trakId : currentTrakId
+      }
+
+      waitingWebSocket.send(stack.toJson(command));
     };
+
+    waitingWebSocket.onclose = function(close) {
+        console.log("WebSocket closed.", close);
+      };
 
     waitingWebSocket.onmessage = function(message) {
       waitingWebSocket.close();
       waitingWebSocket = null;
 
       console.log("WebSocket received message.", message);
-//      game = stack.toJavascript(message.data);
-//      performGameLogic();
-    };
-
-    waitingWebSocket.onclose = function(close) {
-      console.log("WebSocket closed.", close);
+      point = stack.toJavascript(message.data);
+      alertify.set({ delay: 0 });
+      alertify.log(point.description);
     };
 
     waitingWebSocket.onerror = function(error) {

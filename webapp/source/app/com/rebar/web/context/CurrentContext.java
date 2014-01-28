@@ -12,10 +12,10 @@ import com.xmog.stack.web.context.AbstractCurrentContext;
 /**
  * @author Dan Kelley
  */
-public class CurrentContext extends AbstractCurrentContext<Account> {
-  @Inject
-  public CurrentContext(Provider<HttpServletRequest> httpRequestProvider, RequestTypeManager requestTypeManager,
-      RememberMeManager rememberMeManager) {
-    super(httpRequestProvider, requestTypeManager, rememberMeManager);
-  }
-}
+public class CurrentContext extends AbstractCurrentContext<Account, Long, Long> {
+	  @Inject
+	  public CurrentContext(Provider<HttpServletRequest> httpRequestProvider, RequestTypeManager requestTypeManager,
+	      RememberMeManager rememberMeManager) {
+	    super(httpRequestProvider, requestTypeManager, rememberMeManager);
+	  }
+	}

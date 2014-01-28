@@ -57,7 +57,6 @@ public class AccountApiController {
     List<Long> roleIds = accountService.findRolesByAccountId(account.getAccountId());
     log.debug("Found Roles: " + roleIds.size() + ":" + command.getRememberMe());
     currentContextProvider.get().signIn(account, roleIds, command.getRememberMe());
-    
     log.debug("We stateless? " + currentContextProvider.get().isStateless());    
     
     log.debug("All done");

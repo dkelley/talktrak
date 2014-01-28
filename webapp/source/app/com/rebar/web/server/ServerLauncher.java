@@ -4,6 +4,18 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.TypeLiteral;
+import com.xmog.stack.StackConfiguration;
+import com.xmog.stack.reporter.StackErrorReporter;
+import com.xmog.stack.reporter.StackSlowPerformanceReporter;
+import com.xmog.stack.service.StackAccountService;
+import com.xmog.stack.web.StackCommonPageModelProvider;
+import com.xmog.stack.web.context.StackAccount;
+import com.xmog.stack.web.context.StackCurrentContext;
+import com.xmog.stack.web.interceptor.AuthenticationInterceptor;
+import com.xmog.stack.web.provider.StackExceptionMapper;
+import com.xmog.stack.web.server.StackServerConfigurer;
+import com.xmog.stack.web.server.StackServerLauncher;
+import com.xmog.stack.web.server.StackServletModule;
 import com.rebar.Configuration;
 import com.rebar.model.Account;
 import com.rebar.reporter.ErrorReporter;
@@ -12,19 +24,9 @@ import com.rebar.service.AccountService;
 import com.rebar.web.CommonPageModelProvider;
 import com.rebar.web.context.CurrentContext;
 import com.rebar.web.exception.ExceptionMapper;
-import com.xmog.stack.StackConfiguration;
-import com.xmog.stack.reporter.StackErrorReporter;
-import com.xmog.stack.reporter.StackSlowPerformanceReporter;
-import com.xmog.stack.service.StackAccountService;
-import com.xmog.stack.web.StackCommonPageModelProvider;
-import com.xmog.stack.web.context.StackCurrentContext;
-import com.xmog.stack.web.provider.StackExceptionMapper;
-import com.xmog.stack.web.server.StackServerConfigurer;
-import com.xmog.stack.web.server.StackServerLauncher;
-import com.xmog.stack.web.server.StackServletModule;
 
 /**
- * @author @authorName
+ * @author Transmogrify LLC.
  */
 public class ServerLauncher extends StackServerLauncher {
   public static void main(String[] args) throws Exception {
@@ -35,25 +37,17 @@ public class ServerLauncher extends StackServerLauncher {
   protected StackServerConfigurer createStackServerConfigurer() {
     return new StackServerConfigurer() {
       @Override
-      protected boolean shouldPrintLoggingConfigurationErrors() {
-        // TODO: for some reason, this is the only project that shows logging config errors even though logging is
-        // successfully configured.
-        // Disabling error output for now as a quick workaround, need to figure out the root cause.
-        return false;
-      }
-
-      @Override
-      public StackServletModule createStackServletModule() {
-        return new StackServletModule(this) {
+      public StackServletModule<Long, Long> createStackServletModule() {
+        return new StackServletModule<Long, Long>(this) {
           @Override
           protected String getControllerPackageName() {
             return "com.rebar.web.controller";
           }
-
+          
           @Override
           protected String getWebSocketPackageName() {
             return "com.rebar.web.websocket";
-          }
+          }          
 
           @Override
           protected Class<? extends StackExceptionMapper> getStackExceptionMapperClass() {
@@ -76,24 +70,29 @@ public class ServerLauncher extends StackServerLauncher {
           }
 
           @Override
-          protected Class<? extends StackCurrentContext<?>> getStackCurrentContextClass() {
+          protected Class<? extends StackCurrentContext<? extends StackAccount<Long>, Long, Long>> getStackCurrentContextClass() {
             return CurrentContext.class;
           }
 
           @Override
           protected void bindToStackCurrentContextClass() {
-            bind(new TypeLiteral<StackCurrentContext<Account>>() {}).to(CurrentContext.class);
+            bind(new TypeLiteral<StackCurrentContext<Account, Long, Long>>() {}).to(CurrentContext.class);
           }
 
+          @Override
+          protected Class<? extends StackAccountService<? extends StackAccount<Long>, Long, Long>> getStackAccountServiceClass() {
+            return AccountService.class;
+          }          
+          
           @Override
           protected void bindToStackAccountServiceClass() {
-            bind(new TypeLiteral<StackAccountService<Account>>() {}).to(AccountService.class);
+            bind(new TypeLiteral<StackAccountService<Account, Long, Long>>() {}).to(AccountService.class);
           }
-
+          
           @Override
-          protected Class<? extends StackAccountService<?>> getStackAccountServiceClass() {
-            return AccountService.class;
-          }
+          protected AuthenticationInterceptor<Long, Long> createAuthenticationInterceptor() {
+            return new AuthenticationInterceptor<Long, Long>();
+          }          
 
           @Override
           protected Class<? extends StackSlowPerformanceReporter> getStackSlowPerformanceReporterClass() {
@@ -113,7 +112,7 @@ public class ServerLauncher extends StackServerLauncher {
           }
         };
       }
-
+      
       @Override
       public Module createStackOverridesModule() {
         return new AbstractModule() {
